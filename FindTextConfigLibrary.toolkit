@@ -1,0 +1,169 @@
+﻿ConfigFileHandler()
+                {
+
+If FileExist(ConfigFileTitle)
+{
+
+}
+Else
+{
+    ; MsgBox, , Title, Test!!!,
+    FileAppend, ,adShredder.cfg
+    Sleep, 250
+    IniWrite,Youtube Ad-Shredder, %config_path%, INFO, AppTitle
+    IniWrite,- Opera, %config_path%, BROWSER, BrowserTitle
+    ; IniWrite, SPACER, %config_path%, BROWSER, SPACER
+    ; IniWrite, SPACER, %config_path%, BROWSER, SPACER_
+
+    IniWrite, 1, %config_path%, SWITCHES, PerformCheckForBrowserExit
+    IniWrite, 1, %config_path%, SWITCHES, LockMouseInputDuringClick
+    IniWrite, 1, %config_path%, SWITCHES, RestoreMousePosition
+    IniWrite, 1, %config_path%, SWITCHES, PollConfigFile
+    ; IniWrite,  SPACER, %config_path%, SWITCHES, SPACER
+    ; IniWrite,  SPACER, %config_path%, SWITCHES, SPACER_
+
+    IniWrite, 2100, %config_path%, MAIN_TIMER_SLEEP, DismissAdvertisementTickrate
+    IniWrite, 5100, %config_path%, MAIN_TIMER_SLEEP, VerifyWindowExistenceTickrate
+    IniWrite, 8000, %config_path%, MAIN_TIMER_SLEEP, PollConfigFile
+    ; IniWrite, SPACER, %config_path%, MAIN_TIMER_SLEEP, SPACER
+    ; IniWrite, SPACER, %config_path%, MAIN_TIMER_SLEEP, SPACER_
+
+    IniWrite, 150, %config_path%, ADVERTISEMENT_SLEEP, SleepAfterTextAQuery
+    IniWrite, 150, %config_path%, ADVERTISEMENT_SLEEP, SleepAfterTextBQuery
+    IniWrite, 150, %config_path%, ADVERTISEMENT_SLEEP, SleepAfterTextCQuery
+    ; IniWrite, SPACER, %config_path%, ADVERTISEMENT_SLEEP, SPACER
+    ; IniWrite, SPACER, %config_path%, ADVERTISEMENT_SLEEP, SPACER_
+
+    IniWrite,|<>*115$29.zwzzzUtyTy0nwzssbzzlzAG0kyFY0kQ78lsMSFkwEQXUsYN6838m0MCMY1zzzszzzzlzzzzXw, %config_path%, ADTEXT_CODES, Text_A
+    IniWrite,2459-150000, %config_path%, ADTEXT_CODES, NumField01_A
+    IniWrite,1131-150000, %config_path%, ADTEXT_CODES, NumField02_A
+    IniWrite,2459+150000, %config_path%, ADTEXT_CODES, NumField03_A
+    IniWrite,1131+150000, %config_path%, ADTEXT_CODES, NumField04_A
+
+    IniWrite,|<>*120$29.zwzzzUtyTy0nwzssbzzlzAG0kyFY0kQ78lsMSFkwEQXUsYN6838m0MCMY1zzzszzzzlzzzzXw, %config_path%, ADTEXT_CODES, Text_B
+    IniWrite,2459-150000, %config_path%, ADTEXT_CODES, NumField01_B
+    IniWrite,1131-150000, %config_path%, ADTEXT_CODES, NumField02_B
+    IniWrite,2459+150000, %config_path%, ADTEXT_CODES, NumField03_B
+    IniWrite,1131+150000, %config_path%, ADTEXT_CODES, NumField04_B
+
+    IniWrite,|<>#396@0.90$38.000000000000000000000E0000C400004l0E0022E0000U4N4k0614Fa00sG4EU017148009cF2022F4EU0lYF6M03V2FA00000E000004000001000000008, %config_path%, ADTEXT_CODES, Text_C
+    IniWrite,2461-150000, %config_path%, ADTEXT_CODES, NumField01_C
+    IniWrite,1130-150000, %config_path%, ADTEXT_CODES, NumField02_C
+    IniWrite,2461+150000, %config_path%, ADTEXT_CODES, NumField03_C
+    IniWrite,1130+150000, %config_path%, ADTEXT_CODES, NumField04_C
+
+    IniWrite,|<>*56$29.zwzzzUtyTy0nwzssbzzlzAG0kyFY0kQ78lsMSFkwEQXUsYN6838m0MCMY1zzzszzzzlzzzzXw, %config_path%, ADTEXT_CODES, Text_D
+    IniWrite,2459-150000, %config_path%, ADTEXT_CODES, NumField01_D
+    IniWrite,1131-150000, %config_path%, ADTEXT_CODES, NumField02_D
+    IniWrite,2459+150000, %config_path%, ADTEXT_CODES, NumField03_D
+    IniWrite,1131+150000, %config_path%, ADTEXT_CODES, NumField04_D
+
+    IniWrite, 1, %config_path%, DEBUG, RunWithAdmin
+    IniWrite, 1, %config_path%, DEBUG, DebugMode
+}
+
+IniRead, aDismissAdvertTiming, %config_path%, MAIN_TIMER_SLEEP, DismissAdvertisementTickrate, 2100
+GLOBAL DismissAdvertTiming := aDismissAdvertTiming
+
+IniRead, aVerifyWindowTiming, %config_path%, MAIN_TIMER_SLEEP, VerifyWindowExistenceTickrate, 5100
+GLOBAL VerifyWindowTiming := aVerifyWindowTiming
+
+IniRead, aPollSettingsTime, %config_path%, MAIN_TIMER_SLEEP, PollConfigFile, 8000
+GLOBAL PollSettingsTime := aPollSettingsTime
+
+;;;-------------------------------------;;;
+
+IniRead, aAdvertTimerAtoB, %config_path%, ADVERTISEMENT_SLEEP, SleepAfterTextAQuery, 150
+GLOBAL AdvertTimerAtoB := aAdvertTimerAtoB
+
+IniRead, aAdvertTimerBtoC, %config_path%, ADVERTISEMENT_SLEEP, SleepAfterTextBQuery, 150
+GLOBAL AdvertTimerBtoC := aAdvertTimerBtoC
+
+IniRead, aAdvertTimerCtoD, %config_path%, ADVERTISEMENT_SLEEP, SleepAfterTextCQuery, 150
+GLOBAL AdvertTimerCtoD := aAdvertTimerCtoD
+
+;;;-------------------------------------;;;
+
+IniRead, aCheckForBrowserWindow, %config_path%, SWITCHES, PerformCheckForBrowserExit, 1
+GLOBAL CheckForBrowserWindow := aCheckForBrowserWindow
+
+IniRead, aLockInputDuringClick, %config_path%, SWITCHES, LockMouseInputDuringClick, 1
+GLOBAL LockInputDuringClick := aLockInputDuringClick
+
+IniRead, aRestoreMousePosAfterClick, %config_path%, SWITCHES, RestoreMousePosition, 1
+GLOBAL RestoreMousePosAfterClick := aRestoreMousePosAfterClick
+
+IniRead, aPollSettings, %config_path%, SWITCHES, PollConfigFile, 1
+GLOBAL PollSettings := aPollSettings
+
+;;;-------------------------------------;;;
+
+IniRead, aDebugMode, %config_path%, DEBUG, DebugMode, 0
+GLOBAL DebugMode := aDebugMode
+
+IniRead, aUACelevate, %config_path%, DEBUG, RunWithAdmin, 0
+GLOBAL UACelevate := aUACelevate
+
+
+IniRead, aBrowserTitle, %config_path%, BROWSER, BrowserTitle,- Opera
+GLOBAL BrowserTitle := aBrowserTitle
+
+;;;-------------------------------------;;;
+
+IniRead, aAppHeader, %config_path%, INFO, AppTitle,Youtube Ad-Shredder
+GLOBAL AppHeader := aAppHeader
+
+;;;-------------------------------------;;;
+
+IniRead, aTextAinput00, %config_path%, ADTEXT_CODES, Text_A,|<>*115$29.zwzzzUtyTy0nwzssbzzlzAG0kyFY0kQ78lsMSFkwEQXUsYN6838m0MCMY1zzzszzzzlzzzzXw
+GLOBAL AText := aTextAinput00
+IniRead, aTextAinput01, %config_path%, ADTEXT_CODES, NumField01_A,2459-150000
+GLOBAL TextAinput01 := aTextAinput01
+IniRead, aTextAinput02, %config_path%, ADTEXT_CODES, NumField02_A,1131-150000
+GLOBAL TextAinput02 := aTextAinput02
+IniRead, aTextAinput03, %config_path%, ADTEXT_CODES, NumField03_A,2459+150000
+GLOBAL TextAinput03 := aTextAinput03
+IniRead, aTextAinput04, %config_path%, ADTEXT_CODES, NumField04_A,1131+150000
+GLOBAL TextAinput04 := aTextAinput04
+
+;;;-------------------------------------;;;
+
+IniRead, aTextBinput00, %config_path%, ADTEXT_CODES, Text_B,|<>*120$29.zwzzzUtyTy0nwzssbzzlzAG0kyFY0kQ78lsMSFkwEQXUsYN6838m0MCMY1zzzszzzzlzzzzXw
+GLOBAL BText := aTextBinput00
+IniRead, aTextBinput01, %config_path%, ADTEXT_CODES, NumField01_B,2459-150000
+GLOBAL TextBinput01 := aTextBinput01
+IniRead, aTextBinput02, %config_path%, ADTEXT_CODES, NumField02_B,1131-150000
+GLOBAL TextBinput02 := aTextBinput02
+IniRead, aTextBinput03, %config_path%, ADTEXT_CODES, NumField03_B,2459+150000
+GLOBAL TextBinput03 := aTextBinput03
+IniRead, aTextBinput04, %config_path%, ADTEXT_CODES, NumField04_B,1131+150000
+GLOBAL TextBinput04 := aTextBinput04
+
+;;;-------------------------------------;;;
+
+IniRead, aTextCinput00, %config_path%, ADTEXT_CODES, Text_C,|<>#396@0.90$38.000000000000000000000E0000C400004l0E0022E0000U4N4k0614Fa00sG4EU017148009cF2022F4EU0lYF6M03V2FA00000E000004000001000000008
+GLOBAL CText := aTextCinput00
+IniRead, aTextCinput01, %config_path%, ADTEXT_CODES, NumField01_C,2461-150000
+GLOBAL TextCinput01 := aTextCinput01
+IniRead, aTextCinput02, %config_path%, ADTEXT_CODES, NumField02_C,1130-150000
+GLOBAL TextCinput02 := aTextCinput02
+IniRead, aTextCinput03, %config_path%, ADTEXT_CODES, NumField03_C,2461+150000
+GLOBAL TextCinput03 := aTextCinput03
+IniRead, aTextCinput04, %config_path%, ADTEXT_CODES, NumField04_C,1130+150000
+GLOBAL TextCinput04 := aTextCinput04
+
+;;;-------------------------------------;;;
+
+IniRead, aTextDinput00, %config_path%, ADTEXT_CODES, Text_D,|<>*56$29.zwzzzUtyTy0nwzssbzzlzAG0kyFY0kQ78lsMSFkwEQXUsYN6838m0MCMY1zzzszzzzlzzzzXw
+GLOBAL DText := aTextDinput00
+IniRead, aTextDinput01, %config_path%, ADTEXT_CODES, NumField01_D,2459-150000
+GLOBAL TextDinput01 := aTextDinput01
+IniRead, aTextDinput02, %config_path%, ADTEXT_CODES, NumField02_D,1131-150000
+GLOBAL TextDinput02 := aTextDinput02
+IniRead, aTextDinput03, %config_path%, ADTEXT_CODES, NumField03_D,2459+150000
+GLOBAL TextDinput03 := aTextDinput03
+IniRead, aTextDinput04, %config_path%, ADTEXT_CODES, NumField04_D,1131+150000
+GLOBAL TextDinput04 := aTextDinput04
+
+
+                }
